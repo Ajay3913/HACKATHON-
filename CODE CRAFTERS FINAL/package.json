@@ -1,0 +1,20 @@
+{
+  "name": "medicchain-logistics",
+  "version": "1.0.0",
+  "description": "MedicChain Logistics – decentralized autonomous healthcare logistics network prototype (single-page web app).",
+  "private": true,
+  "scripts": {
+    "start": "npx serve ."
+  },
+  "keywords": [
+    "healthcare-logistics",
+    "blockchain",
+    "smart-contracts",
+    "cold-chain",
+    "prototype"
+  ],
+  "author": "",
+  "license": "UNLICENSED",
+  "dependencies": {}
+}
+

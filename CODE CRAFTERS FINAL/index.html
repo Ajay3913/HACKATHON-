@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>MedicChain Logistics – Decentralized Healthcare Logistics</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="MedicChain Logistics – a decentralized autonomous healthcare logistics network prototype for transparent, tamper-resistant movement of critical medical supplies."
+    />
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+      integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div id="app">
+      <header class="mc-header">
+        <div class="mc-header-left">
+          <div class="logo-mark">MC</div>
+          <div class="logo-text">
+            <div class="logo-title">MedicChain Logistics</div>
+            <div class="logo-subtitle">
+              Decentralized Autonomous Healthcare Logistics Network
+            </div>
+          </div>
+        </div>
+        <nav class="mc-nav">
+          <button class="nav-link active" data-section="dashboard">Dashboard</button>
+          <button class="nav-link" data-section="shipments">Shipments</button>
+          <button class="nav-link" data-section="providers">Transport Providers</button>
+          <button class="nav-link" data-section="bids">Bids & Contracts</button>
+          <button class="nav-link" data-section="blockchain">Blockchain Ledger</button>
+        </nav>
+        <div class="mc-role-switcher">
+          <label for="roleSelect">Active Role</label>
+          <select id="roleSelect">
+            <option value="manufacturer">Pharmaceutical Manufacturer</option>
+            <option value="distribution_center">Medical Distribution Center</option>
+            <option value="hospital">Hospital / Healthcare Facility</option>
+            <option value="lab">Diagnostic Laboratory</option>
+            <option value="transport_provider">Licensed Transport Provider</option>
+            <option value="admin">Healthcare Administrator</option>
+          </select>
+        </div>
+        <div class="mc-user-bar" id="mcUserBar" hidden>
+          <span id="mcUserLabel" class="mc-user-label"></span>
+          <a href="./login.html" id="mcLogout" class="mc-logout">Logout</a>
+        </div>
+      </header>
+
+      <main class="mc-main">
+        <!-- DASHBOARD -->
+        <section id="section-dashboard" class="mc-section active">
+          <div class="hero">
+            <div class="hero-content">
+              <h1>
+                Trustless, Transparent &amp; Traceable<br />
+                Healthcare Logistics.
+              </h1>
+              <p>
+                Orchestrate end‑to‑end movement of vaccines, diagnostics, and critical
+                medical assets on a tamper‑resistant blockchain ledger. Real‑time IoT
+                telemetry, smart‑contract‑driven payments, and provable proof‑of‑delivery –
+                all in one decentralized network.
+              </p>
+              <div class="hero-actions">
+                <button class="btn primary" data-section="shipments">
+                  <i class="fa-solid fa-plus"></i>
+                  Create Transport Request
+                </button>
+                <button class="btn ghost" data-section="blockchain">
+                  <i class="fa-solid fa-link"></i>
+                  View Blockchain Audit Trail
+                </button>
+              </div>
+              <div class="hero-meta">
+                <span><i class="fa-solid fa-shield-heart"></i> Integrity by Design</span>
+                <span><i class="fa-solid fa-temperature-half"></i> Cold‑chain Aware</span>
+                <span><i class="fa-solid fa-globe"></i> Multi‑stakeholder Network</span>
+              </div>
+            </div>
+            <div class="hero-visual">
+              <div class="hero-image-frame">
+                <img
+                  src="https://images.pexels.com/photos/8376234/pexels-photo-8376234.jpeg?auto=compress&cs=tinysrgb&w=1200"
+                  alt="Medical logistics professionals managing vaccine cold-chain"
+                />
+                <div class="hero-badge hero-badge-top">
+                  <i class="fa-solid fa-snowflake"></i>
+                  Live cold‑chain monitoring
+                </div>
+                <div class="hero-badge hero-badge-bottom">
+                  <i class="fa-solid fa-blockchain"></i>
+                  On‑chain proof of delivery
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="mc-grid mc-grid-3 mt-lg">
+            <div class="card stat-card">
+              <div class="stat-label">Active Shipments</div>
+              <div class="stat-value" id="statActiveShipments">0</div>
+              <div class="stat-foot">
+                <i class="fa-solid fa-truck-medical"></i>
+                Live in‑transit consignments
+              </div>
+            </div>
+            <div class="card stat-card">
+              <div class="stat-label">On‑chain Events</div>
+              <div class="stat-value" id="statEvents">0</div>
+              <div class="stat-foot">
+                <i class="fa-solid fa-database"></i>
+                Immutable lifecycle records
+              </div>
+            </div>
+            <div class="card stat-card">
+              <div class="stat-label">Avg. Reliability Score</div>
+              <div class="stat-value" id="statReliability">—</div>
+              <div class="stat-foot">
+                <i class="fa-solid fa-ranking-star"></i>
+                Network‑wide trust metric
+              </div>
+            </div>
+          </div>
+
+          <div class="mc-grid mc-grid-2 mt-lg">
+            <div class="card">
+              <div class="card-header">
+                <h2>Real‑time Cold‑Chain Watch</h2>
+                <span class="tag info">Simulated IoT feed</span>
+              </div>
+              <div id="telemetryTimeline" class="timeline"></div>
+            </div>
+            <div class="card">
+              <div class="card-header">
+                <h2>Recent Blockchain Events</h2>
+              </div>
+              <div id="recentEvents" class="event-list"></div>
+            </div>
+          </div>
+        </section>
+
+        <!-- SHIPMENTS (CRUD) -->
+        <section id="section-shipments" class="mc-section">
+          <div class="section-header">
+            <div>
+              <h2>Healthcare Shipments</h2>
+              <p>
+                Create, update, track, and verify transport requests for vaccines,
+                diagnostics, and biologicals. Each state transition writes a tamper‑proof
+                event on the MedicChain ledger.
+              </p>
+            </div>
+            <button id="btnNewShipment" class="btn primary">
+              <i class="fa-solid fa-plus"></i>
+              New Transport Request
+            </button>
+          </div>
+
+          <div class="card">
+            <form id="shipmentForm" class="form-grid">
+              <input type="hidden" id="shipmentId" />
+
+              <div class="form-field">
+                <label for="shipmentTitle">Request Title</label>
+                <input
+                  id="shipmentTitle"
+                  type="text"
+                  placeholder="Urgent vaccine distribution – North region"
+                  required
+                />
+              </div>
+
+              <div class="form-field">
+                <label for="shipmentCargoType">Cargo Type</label>
+                <select id="shipmentCargoType" required>
+                  <option value="Vaccines">Vaccines</option>
+                  <option value="Diagnostic Specimens">Diagnostic Specimens</option>
+                  <option value="Blood Samples">Blood Samples</option>
+                  <option value="Biological Materials">Biological Materials</option>
+                  <option value="Emergency Medical Equipment">Emergency Medical Equipment</option>
+                </select>
+              </div>
+
+              <div class="form-field">
+                <label for="shipmentFrom">Pickup Location</label>
+                <input
+                  id="shipmentFrom"
+                  type="text"
+                  placeholder="Pharma Distribution Center – City A"
+                  required
+                />
+              </div>
+
+              <div class="form-field">
+                <label for="shipmentTo">Delivery Location</label>
+                <input
+                  id="shipmentTo"
+                  type="text"
+                  placeholder="City B – Hospital Campus"
+                  required
+                />
+              </div>
+
+              <div class="form-field">
+                <label for="shipmentStorage">Storage Conditions</label>
+                <input
+                  id="shipmentStorage"
+                  type="text"
+                  placeholder="2–8°C, continuous monitoring, light‑protected"
+                  required
+                />
+              </div>
+
+              <div class="form-field">
+                <label for="shipmentDeadline">Required Delivery Time</label>
+                <input id="shipmentDeadline" type="datetime-local" required />
+              </div>
+
+              <div class="form-field">
+                <label for="shipmentNotes">Clinical / Regulatory Notes</label>
+                <textarea
+                  id="shipmentNotes"
+                  rows="2"
+                  placeholder="WHO PQS compliant transport. Handle as high‑priority cold‑chain shipment."
+                ></textarea>
+              </div>
+
+              <div class="form-actions">
+                <button type="submit" class="btn primary">
+                  <i class="fa-solid fa-floppy-disk"></i>
+                  Save Request to Blockchain
+                </button>
+                <button type="button" id="btnResetShipment" class="btn ghost">
+                  Reset
+                </button>
+              </div>
+            </form>
+          </div>
+
+          <div class="card mt-md">
+            <div class="card-header">
+              <h3>All Shipments</h3>
+              <div class="filters">
+                <label>
+                  Status
+                  <select id="shipmentFilterStatus">
+                    <option value="all">All</option>
+                    <option value="draft">Draft</option>
+                    <option value="open_for_bids">Open for Bids</option>
+                    <option value="in_transit">In Transit</option>
+                    <option value="delivered">Delivered</option>
+                  </select>
+                </label>
+              </div>
+            </div>
+            <div class="responsive-table">
+              <table>
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Title</th>
+                    <th>Cargo</th>
+                    <th>From → To</th>
+                    <th>Status</th>
+                    <th>Provider</th>
+                    <th>Deadline</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="shipmentTableBody"></tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- TRANSPORT PROVIDERS (CRUD) -->
+        <section id="section-providers" class="mc-section">
+          <div class="section-header">
+            <div>
+              <h2>Licensed Transport Providers</h2>
+              <p>
+                Register medically‑certified logistics partners, manage capabilities, and
+                maintain reliability scores fed by on‑chain delivery performance.
+              </p>
+            </div>
+            <button id="btnNewProvider" class="btn primary">
+              <i class="fa-solid fa-user-plus"></i>
+              Add Provider
+            </button>
+          </div>
+
+          <div class="card">
+            <form id="providerForm" class="form-grid">
+              <input type="hidden" id="providerId" />
+
+              <div class="form-field">
+                <label for="providerName">Provider Name</label>
+                <input
+                  id="providerName"
+                  type="text"
+                  placeholder="MediTrans Cold‑Chain Pvt Ltd"
+                  required
+                />
+              </div>
+
+              <div class="form-field">
+                <label for="providerVehicle">Vehicle Capabilities</label>
+                <input
+                  id="providerVehicle"
+                  type="text"
+                  placeholder="Refrigerated trucks, GDP‑compliant vans"
+                  required
+                />
+              </div>
+
+              <div class="form-field">
+                <label for="providerCoverage">Coverage Region</label>
+                <input
+                  id="providerCoverage"
+                  type="text"
+                  placeholder="City A, City B, peri‑urban clusters"
+                />
+              </div>
+
+              <div class="form-field">
+                <label for="providerReliability">Reliability Score (0–100)</label>
+                <input
+                  id="providerReliability"
+                  type="number"
+                  min="0"
+                  max="100"
+                  step="1"
+                  value="90"
+                  required
+                />
+              </div>
+
+              <div class="form-field">
+                <label for="providerCredentials">Medical / Regulatory Credentials</label>
+                <textarea
+                  id="providerCredentials"
+                  rows="2"
+                  placeholder="GDP, GxP, ISO 9001 certified; drivers trained in cold‑chain handling."
+                ></textarea>
+              </div>
+
+              <div class="form-actions">
+                <button type="submit" class="btn primary">
+                  <i class="fa-solid fa-floppy-disk"></i>
+                  Save Provider
+                </button>
+                <button type="button" id="btnResetProvider" class="btn ghost">
+                  Reset
+                </button>
+              </div>
+            </form>
+          </div>
+
+          <div class="card mt-md">
+            <div class="responsive-table">
+              <table>
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Name</th>
+                    <th>Vehicle Capabilities</th>
+                    <th>Region</th>
+                    <th>Reliability</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="providerTableBody"></tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- BIDS & CONTRACTS -->
+        <section id="section-bids" class="mc-section">
+          <div class="section-header">
+            <div>
+              <h2>Smart‑Contract Bidding & Dispatch</h2>
+              <p>
+                Transport providers submit bids on open requests. The platform evaluates
+                cost, ETA, and reliability scores to automatically select the optimal
+                provider and materialize an immutable logistics agreement on‑chain.
+              </p>
+            </div>
+          </div>
+
+          <div class="mc-grid mc-grid-2">
+            <div class="card">
+              <div class="card-header">
+                <h3>Open for Bids</h3>
+              </div>
+              <div class="responsive-table">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>#</th>
+                      <th>Title</th>
+                      <th>Cargo</th>
+                      <th>Deadline</th>
+                      <th>Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody id="biddingShipmentsBody"></tbody>
+                </table>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-header">
+                <h3>Submit / Review Bids</h3>
+              </div>
+              <form id="bidForm" class="form-grid">
+                <input type="hidden" id="bidShipmentId" />
+                <input type="hidden" id="bidId" />
+
+                <div class="form-field">
+                  <label for="bidProviderSelect">Transport Provider</label>
+                  <select id="bidProviderSelect" required></select>
+                </div>
+
+                <div class="form-field">
+                  <label for="bidPrice">Proposed Price (USD)</label>
+                  <input
+                    id="bidPrice"
+                    type="number"
+                    min="0"
+                    step="1"
+                    placeholder="1200"
+                    required
+                  />
+                </div>
+
+                <div class="form-field">
+                  <label for="bidEtaHours">ETA (Hours)</label>
+                  <input
+                    id="bidEtaHours"
+                    type="number"
+                    min="1"
+                    max="72"
+                    step="1"
+                    placeholder="10"
+                    required
+                  />
+                </div>
+
+                <div class="form-field">
+                  <label for="bidVehicleFeatures">Vehicle Features</label>
+                  <input
+                    id="bidVehicleFeatures"
+                    type="text"
+                    placeholder="Reefer truck, backup power, GPS + temperature sensors"
+                    required
+                  />
+                </div>
+
+                <div class="form-actions">
+                  <button type="submit" class="btn primary">
+                    <i class="fa-solid fa-gavel"></i>
+                    Submit Bid (Smart Contract)
+                  </button>
+                </div>
+              </form>
+
+              <div class="mt-md">
+                <h4 class="subheading">Bids on Selected Shipment</h4>
+                <div class="responsive-table">
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>#</th>
+                        <th>Provider</th>
+                        <th>Price</th>
+                        <th>ETA</th>
+                        <th>Reliability</th>
+                        <th>Score</th>
+                        <th>Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody id="bidsTableBody"></tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card mt-md">
+            <div class="card-header">
+              <h3>Lifecycle & Proof‑of‑Delivery</h3>
+            </div>
+            <div id="lifecycleTimeline" class="timeline"></div>
+          </div>
+        </section>
+
+        <!-- BLOCKCHAIN LEDGER VIEW -->
+        <section id="section-blockchain" class="mc-section">
+          <div class="section-header">
+            <div>
+              <h2>Blockchain Ledger & Audit Trail</h2>
+              <p>
+                Every transport request, bid, dispatch, pickup, telemetry event, and
+                delivery confirmation is recorded as an immutable block linked by
+                cryptographic hashes.
+              </p>
+            </div>
+          </div>
+
+          <div class="mc-grid mc-grid-2">
+            <div class="card">
+              <div class="card-header">
+                <h3>Block Explorer</h3>
+              </div>
+              <div id="blockList" class="block-list"></div>
+            </div>
+
+            <div class="card">
+              <div class="card-header">
+                <h3>Block Details</h3>
+              </div>
+              <pre id="blockDetails" class="block-details">Select a block to inspect its payload.</pre>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <footer class="mc-footer">
+        <div>MedicChain Logistics – Academic Prototype</div>
+        <div>
+          Images from
+          <a href="https://www.pexels.com" target="_blank" rel="noreferrer">Pexels</a>
+          and
+          <a href="https://unsplash.com" target="_blank" rel="noreferrer">Unsplash</a>.
+        </div>
+      </footer>
+    </div>
+
+    <script src="./blockchain.js"></script>
+    <script src="./app.js"></script>
+  </body>
+</html>
+

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Login – MedicChain Logistics</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+    <link rel="stylesheet" href="./login.css" />
+  </head>
+  <body>
+    <div class="login-page">
+      <div class="login-brand">
+        <div class="logo-mark">MC</div>
+        <div class="login-brand-text">
+          <div class="logo-title">MedicChain Logistics</div>
+          <div class="logo-subtitle">Healthcare logistics platform</div>
+        </div>
+      </div>
+
+      <p class="login-tagline">
+        Sign in as <strong>Hospital</strong> or <strong>Medical Supplier</strong>. Use the credentials provided by your administrator.
+      </p>
+
+      <div class="login-dual">
+        <!-- Hospital / Hospitality -->
+        <div class="login-card">
+          <div class="login-card-header">
+            <div class="login-card-icon hospital"><i class="fa-solid fa-hospital"></i></div>
+            <div>
+              <h2 class="login-card-title">Hospital / Hospitality</h2>
+              <p class="login-card-desc">Create transport requests &amp; confirm delivery</p>
+            </div>
+          </div>
+          <form id="formHospital" class="login-form" autocomplete="on">
+            <div>
+              <label for="hospitalUsername">Username</label>
+              <input
+                id="hospitalUsername"
+                type="text"
+                placeholder="Username"
+                autocomplete="username"
+              />
+            </div>
+            <div>
+              <label for="hospitalPassword">Password</label>
+              <input
+                id="hospitalPassword"
+                type="password"
+                placeholder="Password"
+                autocomplete="current-password"
+              />
+            </div>
+            <p id="hospitalError" class="login-error" role="alert"></p>
+            <button type="submit" class="btn primary">
+              <i class="fa-solid fa-right-to-bracket"></i> Sign in
+            </button>
+          </form>
+        </div>
+
+        <!-- Medical Supplier -->
+        <div class="login-card">
+          <div class="login-card-header">
+            <div class="login-card-icon supplier"><i class="fa-solid fa-truck-medical"></i></div>
+            <div>
+              <h2 class="login-card-title">Medical Supplier</h2>
+              <p class="login-card-desc">Submit bids &amp; manage shipments</p>
+            </div>
+          </div>
+          <form id="formSupplier" class="login-form" autocomplete="on">
+            <div>
+              <label for="supplierUsername">Username</label>
+              <input
+                id="supplierUsername"
+                type="text"
+                placeholder="Username"
+                autocomplete="username"
+              />
+            </div>
+            <div>
+              <label for="supplierPassword">Password</label>
+              <input
+                id="supplierPassword"
+                type="password"
+                placeholder="Password"
+                autocomplete="current-password"
+              />
+            </div>
+            <p id="supplierError" class="login-error" role="alert"></p>
+            <button type="submit" class="btn primary">
+              <i class="fa-solid fa-right-to-bracket"></i> Sign in
+            </button>
+          </form>
+        </div>
+      </div>
+
+      <p class="login-footer"><a href="./index.html">Continue without login</a></p>
+    </div>
+    <script src="./login.js"></script>
+  </body>
+</html>
